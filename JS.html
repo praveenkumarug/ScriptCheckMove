@@ -1,0 +1,164 @@
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>JavaScript</title>
+ 	<style>
+    .Allmovie {
+    float: left;
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    border: 3px solid #8AC007; 
+    overflow: auto; 
+}
+    .Mymovie {
+    float: left;
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    border: 3px solid #8AC007;  
+    overflow: auto;
+}
+   
+    .button {
+    float: left;
+}
+</style>
+
+  <script>
+ 
+     function moveRight() {
+  
+      var z   = document.getElementById('list1');
+      var len = z.getElementsByTagName("LI").length;
+      var hom = new Array();
+      for (var j=0;j<len;j++)
+      {
+         hom.push(z.getElementsByTagName("LI")[j]);
+      }
+
+       for ( var i=0; i<len; i++ )
+       {
+         var check = hom[i].getElementsByTagName('input')[0];
+         if(check.checked==true)
+         {
+           check.checked = false;
+          document.getElementById('list2').appendChild(hom[i]); 
+         }
+       }
+    };
+
+    function moveLeft(){
+      var z   = document.getElementById('list2')
+      var len = z.getElementsByTagName("LI").length;
+
+      var hom = new Array();
+      for (var j=0;j<len;j++)
+      {
+         hom.push(z.getElementsByTagName("LI")[j]);
+      }
+      for (var i=0;i<len;i++)
+       {
+         var check = hom[i].getElementsByTagName('input')[0];
+         if(check.checked)
+         {
+           check.checked = false;
+           document.getElementById('list1').appendChild(hom[i]);
+         }
+       }
+    };
+
+     function submitFunction()
+     {
+      var name = document.forms["myForm"]["nam"].value;
+      if ( name=="" || name==null )
+      {
+        alert("Please enter the Name");
+        return false;
+      }
+      var mail = document.forms["myForm"]["mail"].value;
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (!mail.match(mailformat))
+      {
+        alert("Please enter valid mail id.");
+        return false;
+      }
+      var select = document.getElementById('set').value;
+      if (select=="" || select==null)
+      {
+        alert("please select gender");
+        return false;
+      }
+      var movie = document.getElementById('list2')
+      var my = movie.getElementsByTagName("LI");
+      var len = document.getElementById('list2').getElementsByTagName("LI").length;
+      var myWindow = window.open("test.txt");
+     myWindow.document.write("<h1 align= center >PersonalDetails</h1>");
+     myWindow.document.write("Name = "+name+"<br>");
+     myWindow.document.write("Email = "+mail+"<br>");
+     myWindow.document.write("Gender = "+select+"<br>");
+     myWindow.document.write("Movie = "+len+"<br>");
+     myWindow.document.write("MY Movies "+"<br>");
+     for (var i=0; i<len; i++)
+     {
+         myWindow.document.write(my[i].innerHTML+"<br>");
+     }
+
+    };
+
+  </script>
+ </head>
+
+<body>
+  
+    <h1 align="center">Personal Details</h1>
+    <form id="myForm" name="form1" onSubmit="submitFunction()" method= "post"  >
+    
+     <label>Name :</label><br>
+     <input type="text" name="name" id="nam"><br>
+
+     <label>Email :</label><br>
+     <input type="text" name="email" id="mail"><br>
+
+     <label>Gender :</label><br>
+     <select id="set">
+      <option value="">Select</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="none">Notspecified</option>
+     </select><br><br>
+
+     <div class="Allmovie" id="a">
+     <label>AllMovies</label><br>
+     <ul id="list1">
+       <li><input type="checkbox" name="a" value="Mangatha"/>Mangatha</li>
+       <li><input type="checkbox" name="b" value="Billa"/>Billa</li>
+       <li><input type="checkbox" name="c" value="Veeram"/>Veeram</li>
+     </ul>
+     </div>
+
+     <div class="button">
+        <br><br>
+        <input type="button" value="-->" onclick="moveRight()">
+        <br><br><br><br>
+        <input type="button" value="<--" onclick="moveLeft()">
+     </div>
+
+     <div class="Mymovie" id="b">
+       <label>MyMovies</label><br>
+     <ul id="list2">
+       <li><input type="checkbox" name="d" value="Puli">Puli</li>
+       <li><input type="checkbox" name="e" value="Thuppaki">Thuppaki</li>
+       <li><input type="checkbox" name="f" value="Kaththi">Kaththi</li>
+     </ul>
+     </div>&nbsp;
+
+     <div>
+         <p><input type="submit" value="Submit" ></p>
+     </div>
+     <p id="demo"></p>
+    </form>  
+
+</body>
+ </html>
